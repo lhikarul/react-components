@@ -1,12 +1,17 @@
 import Button from "./components/Button";
 import SearchIcon from "./Icons/Search";
+import Switch from "./components/Switch";
+import { ThemeProvider } from "@emotion/react";
+import { theme } from "./theme";
+
 function App() {
   return (
-    <div>
-      <Button variant="contained" prependIcon={<SearchIcon />}>
-        Button
-      </Button>
-    </div>
+    <ThemeProvider theme={theme.default}>
+      <Switch
+        themeColor="primary"
+        onChange={(checked) => console.log("checked ", checked)}
+      />
+    </ThemeProvider>
   );
 }
 
