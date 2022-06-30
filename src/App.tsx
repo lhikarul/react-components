@@ -2,33 +2,29 @@ import Radio, { RadioGroup } from "./components/Radio";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "./theme";
 import { useState } from "react";
+import { toastMessage } from "./components/Toast";
+import Button from "./components/Button";
 
 function App() {
-  const radioList = [
-    {
-      value: "BTC",
-      label: "BTC",
-    },
-    {
-      value: "ETH",
-      label: "ETH",
-    },
-    {
-      value: "SOl",
-      label: "SOL",
-    },
-  ];
-  const [value, setValue] = useState(radioList[0].value);
-  const handleRadioSelect = (value: string) => {
-    setValue(value);
+  const [value, setValue] = useState(0);
+  const handleOnClick = () => {
+    setValue(value + 1);
+    toastMessage.success({
+      content: `${value}`,
+    });
   };
   return (
     <ThemeProvider theme={theme.default}>
-      <RadioGroup value={value} onChange={(val) => handleRadioSelect(val)}>
-        {radioList.map((radio) => (
-          <Radio value={radio.value} key={radio.value} label={radio.label} />
-        ))}
-      </RadioGroup>
+      <Button
+        onClick={handleOnClick}
+        // onClick={() =>
+        //   toastMessage.success({
+        //     content: `${value}`,
+        //   })
+        // }
+      >
+        12345
+      </Button>
     </ThemeProvider>
   );
 }

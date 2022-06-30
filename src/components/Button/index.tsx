@@ -4,27 +4,34 @@ import { StyledButton, Loading, Prepend, Append } from "./Button.style";
 export type Variant = "contained" | "outlined" | "text";
 
 interface ButtonProps {
-  variant: Variant;
+  variant?: Variant;
   children: ReactElement | string;
   loading?: boolean;
   disalbed?: boolean;
   prependIcon?: ReactElement;
   appendIcon?: ReactElement;
   color?: string;
+  onClick?: () => void;
 }
 
 function Button(props: ButtonProps) {
   const {
     loading,
     children,
-    variant,
+    variant = "contained",
     color = "#1976d2",
     disalbed,
     appendIcon,
     prependIcon,
+    onClick,
   } = props;
   return (
-    <StyledButton variant={variant} color={color} disabled={disalbed}>
+    <StyledButton
+      variant={variant}
+      color={color}
+      disabled={disalbed}
+      onClick={onClick}
+    >
       {loading && (
         <Loading
           size={16}
