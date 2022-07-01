@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { createPortal, render } from "react-dom";
 import { ToastProps } from "./types";
 import SuccessIcon from "../../Icons/Success";
 import { Wrapper } from "./Toast.styles";
 import { getContainer } from "./utils";
-import { createRoot } from "react-dom/client";
+
 const iconMap = {
   success: <SuccessIcon />,
 };
