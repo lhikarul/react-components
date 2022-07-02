@@ -1,18 +1,31 @@
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "./theme";
-import Skelton from "./components/Skelton";
+import Radio, { RadioGroup } from "./components/Radio";
+import { useState } from "react";
 
 function App() {
+  const list = [
+    {
+      value: "BTC",
+      label: "BTC",
+    },
+    {
+      value: "ETH",
+      label: "ETH",
+    },
+    {
+      value: "SOL",
+      label: "SOL",
+    },
+  ];
+  const [value, setValue] = useState(list[0]?.value);
   return (
     <ThemeProvider theme={theme.default}>
-      <Skelton width={200} height={20} style={{ marginBottom: 6 }} />
-      <Skelton variant="rectangular" style={{ marginBottom: 6 }} />
-      <Skelton
-        width={100}
-        height={100}
-        variant="circular"
-        style={{ marginBottom: 6 }}
-      />
+      <RadioGroup value={value} onChange={(val) => setValue(val)}>
+        {list.map((item) => (
+          <Radio value={item.value} label={item.label} key={item.value} />
+        ))}
+      </RadioGroup>
     </ThemeProvider>
   );
 }

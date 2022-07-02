@@ -13,9 +13,7 @@ export const Radio = styled.div<{ color: string }>`
     font-weight: 500;
     font-size: 18px;
   }
-  input:checked ~ .checkmark {
-    /* border: 2px solid #ffffff; */
-  }
+
   input:checked ~ .checkmark:after {
     display: block;
   }
@@ -40,7 +38,6 @@ export const Radio = styled.div<{ color: string }>`
     height: 12px;
     border-radius: 50%;
     background: ${(props) => props.color};
-    /* background: linear-gradient(80.91deg, #ff58f8 0%, #00ffff 100%); */
   }
 `;
 

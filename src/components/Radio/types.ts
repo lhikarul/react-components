@@ -5,7 +5,6 @@ export interface RadioProps {
   label: string;
   checked?: boolean;
   className?: string;
-  onChange?: () => void;
   themeColor?: "primary" | "secondary" | string;
 }
 

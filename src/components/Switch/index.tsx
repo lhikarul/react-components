@@ -51,7 +51,7 @@ function Switch(props: SwitchButtonProps) {
       <Label
         ref={labelRef}
         padding={18 / 3}
-        labelWidth={40}
+        labelWidth={labelWidth}
         switchWidth={switchWidth}
         checked={checked}
       >
