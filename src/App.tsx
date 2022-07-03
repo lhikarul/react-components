@@ -1,31 +1,43 @@
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "./theme";
-import Radio, { RadioGroup } from "./components/Radio";
 import { useState } from "react";
+import Tabs, { TabPanel, TabContext } from "./components/Tabs";
 
 function App() {
-  const list = [
+  const options = [
     {
-      value: "BTC",
       label: "BTC",
+      value: "BTC",
     },
     {
-      value: "ETH",
       label: "ETH",
+      value: "ETH",
     },
     {
-      value: "SOL",
       label: "SOL",
+      value: "SOL",
     },
   ];
-  const [value, setValue] = useState(list[0]?.value);
+  const [selectedValue, setSelectedValue] = useState(options[0].value);
   return (
     <ThemeProvider theme={theme.default}>
-      <RadioGroup value={value} onChange={(val) => setValue(val)}>
-        {list.map((item) => (
-          <Radio value={item.value} label={item.label} key={item.value} />
-        ))}
-      </RadioGroup>
+      <TabContext value={selectedValue}>
+        <Tabs
+          options={options}
+          value={selectedValue}
+          onChange={(value) => setSelectedValue(value)}
+          gap={48}
+        />
+        <TabPanel value="BTC">
+          <div>BTC Content</div>
+        </TabPanel>
+        <TabPanel value="ETH">
+          <div>ETH Content</div>
+        </TabPanel>
+        <TabPanel value="SOL">
+          <div>SOL Content</div>
+        </TabPanel>
+      </TabContext>
     </ThemeProvider>
   );
 }
