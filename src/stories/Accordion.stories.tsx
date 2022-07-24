@@ -1,8 +1,18 @@
-import { ThemeProvider } from "@emotion/react";
-import Accordion from "./components/Accordion";
-import { theme } from "./theme";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-function App() {
+import Accordion from "../components/Accordion";
+
+export default {
+  title: "SURFACES",
+  component: Accordion,
+  argTypes: {
+    onChange: {
+      action: "onChange",
+    },
+  },
+} as ComponentMeta<typeof Accordion>;
+
+const Template: ComponentStory<typeof Accordion> = (args) => {
   const dataSource = [
     {
       header: <div>header</div>,
@@ -45,16 +55,14 @@ function App() {
     },
   ];
   return (
-    <ThemeProvider theme={theme.default}>
-      <Accordion>
-        {dataSource.map((item, index) => (
-          <Accordion.Panel key={index} header={item.header}>
-            {item.content}
-          </Accordion.Panel>
-        ))}
-      </Accordion>
-    </ThemeProvider>
+    <Accordion {...args}>
+      {dataSource.map((item, index) => (
+        <Accordion.Panel key={index} header={item.header}>
+          {item.content}
+        </Accordion.Panel>
+      ))}
+    </Accordion>
   );
-}
+};
 
-export default App;
+export const Default = Template.bind({});
