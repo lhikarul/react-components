@@ -14,25 +14,10 @@ export const SortIcon = styled.span<{ asc: boolean; color?: string }>`
 export const Container = styled.div`
   display: inline-flex;
   align-items: center;
+  cursor: pointer;
   .sort {
     margin-left: 0.25rem;
     display: inline-flex;
     flex-direction: column;
   }
 `;
-
-// export const Container = styled.div`
-//   /* display: flex;
-//   align-items: center; */
-//   .sort {
-//     /* margin-left: 0.25rem;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     justify-content: center; */
-//     /* ${SortIcon} {
-//       border-style: solid;
-//       border-width: 0 6px 8px 6px;
-//     } */
-//   }
-// `;
