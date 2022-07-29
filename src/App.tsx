@@ -30,6 +30,7 @@ function App() {
         title: "price",
         dataIndex: "price",
         width: "33%",
+        sortable: true,
       },
       {
         key: 3,
@@ -80,7 +81,8 @@ function App() {
           dataSource={dataSource}
           striped
           onRowClick={(data) => console.log(data)}
-          minScrollWidth={500}
+          minWidth={500}
+          skeletonOfRows={3}
         />
       </Demo>
     </ThemeProvider>

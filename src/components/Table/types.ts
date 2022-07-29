@@ -28,7 +28,7 @@ export interface TableProps {
   dataSource: TableDataSource[];
   className?: string;
   height?: string | number;
-  minScrollWidth?: number | string;
+  minWidth?: number | string;
   onRowClick?: (data: any) => void;
   sortPosition?: "start" | "center" | "end";
   striped?: boolean;

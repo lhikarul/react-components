@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useWindowSize } from "react-use";
+import Skelton from "../Skelton";
 import { TableDataSource, TableProps } from "./types";
 import { TableStyled, Td, Th } from "./table.style";
+import Sorting from "./Sorting";
 
 function Table(props: TableProps) {
   const {
     columns,
     className,
     height = "100%",
-    minScrollWidth = 1280,
-    sortPosition,
+    minWidth = 1280,
     striped = false,
     skeletonOfRows,
     onRowClick,
   } = props;
   const [dataSource, setDataSource] = useState<Array<TableDataSource>>([]);
+  const [sortedColumnIndex, setSortedColumnIndex] = useState<number>(-1);
   const { width: windowWidth } = useWindowSize();
-  const isFixed = minScrollWidth >= windowWidth ? true : false;
+  const isFixed = minWidth >= windowWidth ? true : false;
 
   useEffect(() => {
     setDataSource(props.dataSource);
@@ -32,7 +34,7 @@ function Table(props: TableProps) {
       }}
     >
       <TableStyled
-        style={{ minWidth: isFixed ? minScrollWidth + "px" : "100%" }}
+        style={{ minWidth: isFixed ? minWidth + "px" : "100%" }}
         striped={striped}
         rowClick={!!onRowClick}
       >
@@ -44,12 +46,35 @@ function Table(props: TableProps) {
                 style={{ width: column.width }}
                 fixed={isFixed && column.fixed}
               >
-                {column.sortable ? <div>sort</div> : column.title}
+                {column.sortable ? (
+                  <Sorting
+                    column={column}
+                    unSortedDataSource={props.dataSource}
+                    setDataSource={setDataSource}
+                    active={sortedColumnIndex === index}
+                    onChange={() => setSortedColumnIndex(index)}
+                  />
+                ) : (
+                  column.title
+                )}
               </Th>
             ))}
           </tr>
         </thead>
         <tbody>
+          {dataSource.length === 0 &&
+            [...Array(skeletonOfRows)].map((_, index) => (
+              <React.Fragment key={index}>
+                <tr>
+                  {[...Array(columns.length)].map((_, index) => (
+                    <Td key={index}>
+                      <Skelton width={"100%"} height={20} animation="flash" />
+                    </Td>
+                  ))}
+                </tr>
+              </React.Fragment>
+            ))}
+
           {dataSource.map((data, rowIdx) => (
             <React.Fragment key={rowIdx}>
               <tr onClick={() => onRowClick && onRowClick(data)}>
@@ -60,7 +85,6 @@ function Table(props: TableProps) {
                     : typeof data[dataIndex] === "function"
                     ? data[dataIndex]()
                     : data[dataIndex];
-                  console.log(column.title, isFixed, column.fixed);
                   return (
                     <Td key={column.key} fixed={isFixed && column.fixed}>
                       {foundCellData || "-"}
