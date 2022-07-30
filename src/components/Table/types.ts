@@ -25,12 +25,12 @@ export interface TableDataSource {
 
 export interface TableProps {
   columns: TableColumnsProps[];
+  /** Data record array to be displayed	 */
   dataSource: TableDataSource[];
   className?: string;
   height?: string | number;
   minWidth?: number | string;
   onRowClick?: (data: any) => void;
-  sortPosition?: "start" | "center" | "end";
   striped?: boolean;
   skeletonOfRows?: number;
 }

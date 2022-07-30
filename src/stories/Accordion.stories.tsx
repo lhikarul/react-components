@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Accordion from "../components/Accordion";
 
 export default {
-  title: "SURFACES",
+  title: "SURFACES/Accordion",
   component: Accordion,
   argTypes: {
     onChange: {

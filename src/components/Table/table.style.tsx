@@ -74,14 +74,10 @@ export const TableStyled = styled.table<{
       line-height: 1.43;
       letter-spacing: 0.01071em;
     }
-    ${(props) =>
-      !props.striped &&
-      css`
-        tr:hover {
-          background-color: #eaeaea;
-        }
-      `}
     ${(props) => props.striped && StripedStyle}
+    tr:hover td {
+      background-color: #eaeaea;
+    }
   }
 `;
 
