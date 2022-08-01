@@ -1,4 +1,6 @@
-import { ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { ReactElement, useCallback, useEffect, useRef } from "react";
+import { useRafState } from "react-use";
+import { on, off } from "react-use/lib/misc/util";
 import { findAttributeEvent } from "../../utils";
 import Portal from "../Portal";
 
@@ -13,11 +15,11 @@ interface Props {
 function Dropwdown(props: Props) {
   const { children, overlay, onClick, onClose, isOpen = false } = props;
   const childrenRef = useRef<HTMLElement | null>(null);
-  const [childrenSize, setChildrenSize] = useState({
+  const [childrenSize, setChildrenSize] = useRafState({
     width: 0,
     height: 0,
   });
-  const [position, setPosition] = useState({
+  const [position, setPosition] = useRafState({
     top: 0,
     left: 0,
   });
@@ -46,18 +48,22 @@ function Dropwdown(props: Props) {
       left: (childrenRef.current as HTMLElement).getBoundingClientRect().left,
     });
   };
+
   useEffect(() => {
-    document.addEventListener("click", handleOnClose);
+    on(window, "click", handleOnClose);
+
     return () => {
-      document.removeEventListener("click", handleOnClose);
+      off(window, "click", handleOnClose);
     };
   }, [handleOnClose]);
 
   useEffect(() => {
     handleOnResize();
-    window.addEventListener("resize", handleOnResize);
+
+    on(window, "resize", handleOnResize);
+
     return () => {
-      window.removeEventListener("resize", handleOnResize);
+      off(window, "resize", handleOnResize);
     };
   }, []);
 

@@ -1,89 +1,60 @@
 import { ThemeProvider } from "@emotion/react";
 import styled from "@emotion/styled";
-import { useMemo } from "react";
-import Table from "./components/Table";
+import { useState } from "react";
+import Dropwdown from "./components/Dropdown";
 import { theme } from "./theme";
 
 const Demo = styled.div`
+  margin-top: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 24px;
-  background-color: rgb(231, 235, 240);
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const DashboardStyled = styled.span`
+  color: #1976d2;
+  cursor: pointer;
+`;
+
+const MenuList = styled.div`
+  padding: 0.5rem 0;
+  border-radius: 4px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 5px 5px -3px,
+    rgb(0 0 0 / 14%) 0px 8px 10px 1px, rgb(0 0 0 / 12%) 0px 3px;
+`;
+
+const MenuItem = styled.div`
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  &:hover {
+    background-color: #eaeaea;
+  }
 `;
 
 function App() {
-  const columns = useMemo(
-    () => [
-      {
-        key: 1,
-        title: "name",
-        dataIndex: "name",
-        render: (data: any) => (
-          <div>
-            {data.name} ({data.symbol})
-          </div>
-        ),
-        fixed: true,
-        width: "33%",
-        sortable: true,
-      },
-      {
-        key: 2,
-        title: "price",
-        dataIndex: "price",
-        width: "33%",
-        sortable: true,
-      },
-      {
-        key: 3,
-        title: "M.cap",
-        dataIndex: "market_cap",
-        width: "33%",
-      },
-    ],
-    []
-  );
-  const dataSource = [
-    {
-      name: "Bitcoin",
-      symbol: "BTC",
-      price: 60000,
-      market_cap: "475,260,000,000",
-    },
-    {
-      name: "Ethereum",
-      symbol: "ETH",
-      price: 4000,
-      market_cap: "198,260,000,000",
-    },
-    {
-      name: "SOLANA",
-      symbol: "SOL",
-      price: 200,
-      market_cap: "13,309,123,000",
-    },
-    {
-      name: "COSMOS",
-      symbol: "ATOM",
-      price: 54,
-      market_cap: "33,0120,120",
-    },
-    {
-      name: "Avalanche",
-      symbol: "AVAX",
-      price: 145,
-      market_cap: "64,444,280",
-    },
-  ];
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <ThemeProvider theme={theme.default}>
       <Demo>
-        <Table
-          columns={columns}
-          dataSource={dataSource}
-          striped
-          onRowClick={(data) => console.log(data)}
-          minWidth={500}
-          skeletonOfRows={3}
-        />
+        <Dropwdown
+          isOpen={open}
+          onClick={() => setOpen(true)}
+          onClose={() => setOpen(false)}
+          overlay={
+            <MenuList>
+              {["BTC", "ETH", "SOL"].map((item) => (
+                <MenuItem key={item} onClick={() => setOpen(false)}>
+                  {item}
+                </MenuItem>
+              ))}
+            </MenuList>
+          }
+        >
+          <DashboardStyled>DASHBOARD</DashboardStyled>
+        </Dropwdown>
       </Demo>
     </ThemeProvider>
   );
