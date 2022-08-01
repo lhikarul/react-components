@@ -12,7 +12,7 @@ interface Props {
   onClose?: () => void;
   overlay: ReactElement;
 }
-function Dropwdown(props: Props) {
+function Dropdown(props: Props) {
   const { children, overlay, onClick, onClose, isOpen = false } = props;
   const childrenRef = useRef<HTMLElement | null>(null);
   const [childrenSize, setChildrenSize] = useRafState({
@@ -91,4 +91,4 @@ function Dropwdown(props: Props) {
   );
 }
 
-export default Dropwdown;
+export default Dropdown;

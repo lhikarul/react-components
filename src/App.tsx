@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@emotion/react";
 import styled from "@emotion/styled";
 import { useState } from "react";
-import Dropwdown from "./components/Dropdown";
+import Dropdown from "./components/Dropdown";
 import { theme } from "./theme";
 
 const Demo = styled.div`
@@ -39,7 +39,7 @@ function App() {
   return (
     <ThemeProvider theme={theme.default}>
       <Demo>
-        <Dropwdown
+        <Dropdown
           isOpen={open}
           onClick={() => setOpen(true)}
           onClose={() => setOpen(false)}
@@ -54,7 +54,7 @@ function App() {
           }
         >
           <DashboardStyled>DASHBOARD</DashboardStyled>
-        </Dropwdown>
+        </Dropdown>
       </Demo>
     </ThemeProvider>
   );
