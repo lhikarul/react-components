@@ -10,7 +10,6 @@ export default {
 } as ComponentMeta<typeof Dropdown>;
 
 const Demo = styled.div`
-  margin-top: 100px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 24px;
   background-color: #ffffff;
