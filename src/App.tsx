@@ -1,17 +1,13 @@
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "./theme";
-import TextField from "./components/TextField";
-import { useState } from "react";
-import SearchSvg from "./Icons/Search";
+import Autocomplete from "./components/AutoComplete";
 
 function App() {
-  const [value, setValue] = useState("");
   return (
     <ThemeProvider theme={theme.default}>
-      <TextField
-        prefix={<SearchSvg />}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+      <Autocomplete
+        placeholder="please enter an crypto currency"
+        options={["BTC", "ETH", "SOL", "AVAX", "NEAR", "BNB", "FTT"]}
       />
     </ThemeProvider>
   );
