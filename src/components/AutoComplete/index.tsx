@@ -14,6 +14,17 @@ function Autocomplete(props: AutocompleteProps) {
   const { placeholder, width, options } = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
+  const [filteredOptions, setFilteredOptions] = useState(options);
+
+  const handleOnChange = (keyword: string) => {
+    setValue(keyword);
+    setFilteredOptions(
+      options.filter((item) =>
+        item.toLowerCase().includes(keyword.toLowerCase())
+      )
+    );
+  };
+
   return (
     <Dropdown
       isOpen={isOpen}
@@ -22,7 +33,7 @@ function Autocomplete(props: AutocompleteProps) {
       overlay={
         <PopperWrapper>
           <Popper
-            options={options}
+            options={filteredOptions}
             onSelect={(val) => {
               setValue(val);
               setIsOpen(false);
@@ -34,7 +45,7 @@ function Autocomplete(props: AutocompleteProps) {
       <TextField
         width={width}
         placeholder={placeholder}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => handleOnChange(e.target.value)}
         value={value}
       />
     </Dropdown>
