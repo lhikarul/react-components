@@ -13,4 +13,5 @@ export interface RadioGroupProps {
   value: string;
   onChange: (val: string) => void;
   className?: string;
+  row?: boolean;
 }

@@ -3,13 +3,13 @@ import { RadioGroupProps } from "./types";
 import { RadioGroupStyled } from "./Radio.style";
 
 function RadioGroup(props: RadioGroupProps) {
-  const { value, onChange, children, className } = props;
+  const { value, onChange, children, className, row = false } = props;
 
   const handleOnClick = (value: string) => {
     onChange(value);
   };
   return (
-    <RadioGroupStyled className={className}>
+    <RadioGroupStyled className={className} row={row}>
       {React.Children.map(children, (child) =>
         React.cloneElement(child, {
           onChange: () => handleOnClick(child.props.value),

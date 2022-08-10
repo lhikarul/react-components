@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 export const Radio = styled.div<{ color: string }>`
@@ -7,7 +8,7 @@ export const Radio = styled.div<{ color: string }>`
     opacity: 0;
   }
   label {
-    padding-left: 2.5rem;
+    padding-left: 2rem;
     line-height: 24px;
     cursor: pointer;
     font-weight: 500;
@@ -41,8 +42,17 @@ export const Radio = styled.div<{ color: string }>`
   }
 `;
 
-export const RadioGroupStyled = styled.div`
+export const RowStyled = css`
+  display: flex;
+  > div:not(:last-of-type) {
+    margin-right: 0.5rem;
+    margin-bottom: 0;
+  }
+`;
+
+export const RadioGroupStyled = styled.div<{ row: boolean }>`
   > div:not(:last-of-type) {
     margin-bottom: 0.5rem;
   }
+  ${(props) => props.row && RowStyled}
 `;
