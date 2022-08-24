@@ -1,17 +1,23 @@
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "./theme";
-import { useState } from "react";
-import PokemonList from "./containers/PokemonList";
+import { useAuth } from "./context/auth-context";
 
 function App() {
-  const [offset, setOffset] = useState<number>(0);
+  const { login, logout, user } = useAuth();
   return (
     <ThemeProvider theme={theme.default}>
-      <h3>Pokemon List</h3>
-      <button onClick={() => setOffset(offset === 0 ? 20 : 0)}>
-        Change Offset
+      <button
+        onClick={() =>
+          login({
+            username: "Evans",
+            password: "123456",
+            userId: 1,
+          })
+        }
+      >
+        login
       </button>
-      <PokemonList offset={offset} />
+      <div>{JSON.stringify(user)}</div>
     </ThemeProvider>
   );
 }
